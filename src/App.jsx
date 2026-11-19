@@ -2,25 +2,22 @@
 // import './Design.jsx'
 
 
+import Button from '@mui/material/Button'
+
 function App() {
   return (
-    <div className="min-h-screen bg-slate-100 flex flex-col items-center justify-center gap-6">
+    <div className="min-h-screen flex flex-col items-center justify-center gap-6 bg-slate-100">
 
       <h1 className="text-4xl font-bold text-blue-700">
         EarthShake
       </h1>
 
-      <p className="text-gray-600">
-        Tailwind CSS is being tested.
-      </p>
-
-      <button className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors">
-        Test Button
-      </button>
+      <Button variant="contained" color="primary">
+        Test Material UI
+      </Button>
 
     </div>
   )
 }
 
 export default App
-
