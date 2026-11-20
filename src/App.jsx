@@ -9,7 +9,6 @@ import {
 
 import { earthShakeUI } from "./firebaseUI";
 
-import "@firebase-oss/ui-styles/dist.css";
 
 export default function App() {
   const [accessMode, setAccessMode] = useState("signin");

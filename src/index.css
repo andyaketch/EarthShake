@@ -1,5 +1,5 @@
-@layer theme, base, mui, components, utilities;
 @import "tailwindcss";
+@import "@firebase-oss/ui-styles/tailwind";
 
 :root {
   --text: #6b6375;
