@@ -1,23 +1,55 @@
-// import './App.css'
-// import './Design.jsx'
 
+import { useState } from "react";
 
-import Button from '@mui/material/Button'
+import {
+  FirebaseUIProvider,
+  SignInAuthScreen,
+  SignUpAuthScreen
+} from "@firebase-oss/ui-react";
 
-function App() {
+import { earthShakeUI } from "./firebaseUI";
+
+import "@firebase-oss/ui-styles/dist.css";
+
+export default function App() {
+  const [accessMode, setAccessMode] = useState("signin");
+
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center gap-6 bg-slate-100">
+    <FirebaseUIProvider ui={earthShakeUI}>
+      <main style={{
+        maxWidth: "440px",
+        margin: "80px auto",
+        padding: "24px"
+      }}>
 
-      <h1 className="text-4xl font-bold text-blue-700">
-        EarthShake
-      </h1>
+        <h1>EarthShake</h1>
+        <p>Your gateway to EarthShake.</p>
 
-      <Button variant="contained" color="primary">
-        Test Material UI
-      </Button>
+        {accessMode === "signin" ? (
+          <>
+            <SignInAuthScreen />
 
-    </div>
-  )
+            <p>
+              New here?{" "}
+              <button onClick={() => setAccessMode("signup")}>
+                Create an account
+              </button>
+            </p>
+          </>
+        ) : (
+          <>
+            <SignUpAuthScreen />
+
+            <p>
+              Already a member?{" "}
+              <button onClick={() => setAccessMode("signin")}>
+                Sign in
+              </button>
+            </p>
+          </>
+        )}
+
+      </main>
+    </FirebaseUIProvider>
+  );
 }
-
-export default App
