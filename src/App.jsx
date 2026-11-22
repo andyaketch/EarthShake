@@ -1,70 +1,53 @@
-
 import { useEffect, useState } from "react";
-import { listEarthquakes } from "@dataconnect/generated";
-import { dataConnect } from "./firebase";
-import "./App.css";
+import Button from "@mui/material/Button";
+import { monitorAuthState, logoutUser } from "./access";
+import Login from "./Login";
+import Quakes from "./Quakes";
 
+// react basic 1: a component is just a function that return jsx (html looking stuff)
 function App() {
-  const [earthquakes, setEarthquakes] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState("");
+  // react basic 2: useState = a variable that react watch. change it and screen update
+  const [me, setMe] = useState(null); // null means nobody is logged in
+  const [checking, setChecking] = useState(true);
 
+  // react basic 3: useEffect runs after the screen shows. the [] means only one time
   useEffect(() => {
-    async function getEarthquakes() {
-      try {
-        const result = await listEarthquakes(dataConnect);
-        setEarthquakes(result.data.earthquakes);
-      } catch (err) {
-        console.error(err);
-        setError("Could not load earthquake data.");
-      } finally {
-        setLoading(false);
-      }
-    }
+    const stopListening = monitorAuthState((user) => {
+      setMe(user);
+      setChecking(false);
+    });
 
-    getEarthquakes();
+    // cleanup, runs when app go away
+    return () => stopListening();
   }, []);
 
+  // firebase still thinking
+  if (checking) {
+    return <p className="p-6">Checking who you are...</p>;
+  }
+
+  // no user? show login page
+  if (!me) {
+    return <Login />;
+  }
+
   return (
-    <main className="earthquake-page">
-      <header>
-        <h1>EarthShake</h1>
-        <p>Understanding earthquakes. Staying prepared.</p>
+    <main className="min-h-screen">
+      <header className="flex items-center justify-between gap-4 p-4 border-b-4 border-turq">
+        <div>
+          <h1 className="text-3xl font-bold text-turq m-0">EarthShake</h1>
+          <p className="m-0 text-sm">Understanding earthquakes. Staying prepared.</p>
+        </div>
+
+        <div className="flex items-center gap-3">
+          <span className="text-sm">{me.email}</span>
+          <Button variant="contained" onClick={logoutUser}>
+            Logout
+          </Button>
+        </div>
       </header>
 
-      <section>
-        <h2>Recent Earthquakes</h2>
-
-        {loading && <p>Loading earthquake records...</p>}
-
-        {error && <p>{error}</p>}
-
-        {!loading && !error && earthquakes.length === 0 && (
-          <p>No earthquake records available yet.</p>
-        )}
-
-        <div className="earthquake-list">
-          {earthquakes.map((quake) => (
-            <article className="earthquake-card" key={quake.usgsEventId}>
-              <h3>
-                Magnitude {quake.magnitude}
-              </h3>
-
-              <p>{quake.locationDescription}</p>
-
-              <p>Depth: {quake.depthKm} km</p>
-
-              <p>
-                Coordinates: {quake.latitude}, {quake.longitude}
-              </p>
-
-              <p>
-                Date: {new Date(quake.eventTimestamp).toLocaleString()}
-              </p>
-            </article>
-          ))}
-        </div>
-      </section>
+      <Quakes />
     </main>
   );
 }
