@@ -11,6 +11,7 @@ This README will guide you through the process of using the generated JavaScript
   - [*ListEarthquakes*](#listearthquakes)
 - [**Mutations**](#mutations)
   - [*UpsertMember*](#upsertmember)
+  - [*UpsertEarthquake*](#upsertearthquake)
 
 # Accessing the connector
 A connector is a collection of Queries and Mutations. One SDK is generated for each connector - this SDK is generated for the connector `default`. You can find more information about connectors in the [Data Connect documentation](https://firebase.google.com/docs/data-connect#how-does).
@@ -283,6 +284,133 @@ console.log(data.member_upsert);
 executeMutation(ref).then((response) => {
   const data = response.data;
   console.log(data.member_upsert);
+});
+```
+
+## UpsertEarthquake
+You can execute the `UpsertEarthquake` mutation using the following action shortcut function, or by calling `executeMutation()` after calling the following `MutationRef` function, both of which are defined in [dataconnect-generated/index.d.ts](./index.d.ts):
+```typescript
+upsertEarthquake(vars: UpsertEarthquakeVariables): MutationPromise<UpsertEarthquakeData, UpsertEarthquakeVariables>;
+
+interface UpsertEarthquakeRef {
+  ...
+  /* Allow users to create refs without passing in DataConnect */
+  (vars: UpsertEarthquakeVariables): MutationRef<UpsertEarthquakeData, UpsertEarthquakeVariables>;
+}
+export const upsertEarthquakeRef: UpsertEarthquakeRef;
+```
+You can also pass in a `DataConnect` instance to the action shortcut function or `MutationRef` function.
+```typescript
+upsertEarthquake(dc: DataConnect, vars: UpsertEarthquakeVariables): MutationPromise<UpsertEarthquakeData, UpsertEarthquakeVariables>;
+
+interface UpsertEarthquakeRef {
+  ...
+  (dc: DataConnect, vars: UpsertEarthquakeVariables): MutationRef<UpsertEarthquakeData, UpsertEarthquakeVariables>;
+}
+export const upsertEarthquakeRef: UpsertEarthquakeRef;
+```
+
+If you need the name of the operation without creating a ref, you can retrieve the operation name by calling the `operationName` property on the upsertEarthquakeRef:
+```typescript
+const name = upsertEarthquakeRef.operationName;
+console.log(name);
+```
+
+### Variables
+The `UpsertEarthquake` mutation requires an argument of type `UpsertEarthquakeVariables`, which is defined in [dataconnect-generated/index.d.ts](./index.d.ts). It has the following fields:
+
+```typescript
+export interface UpsertEarthquakeVariables {
+  usgsEventId: string;
+  magnitude: number;
+  locationDescription?: string | null;
+  depthKm: number;
+  latitude: number;
+  longitude: number;
+  eventTimestamp: TimestampString;
+}
+```
+### Return Type
+Recall that executing the `UpsertEarthquake` mutation returns a `MutationPromise` that resolves to an object with a `data` property.
+
+The `data` property is an object of type `UpsertEarthquakeData`, which is defined in [dataconnect-generated/index.d.ts](./index.d.ts). It has the following fields:
+```typescript
+export interface UpsertEarthquakeData {
+  earthquake_upsert: Earthquake_Key;
+}
+```
+### Using `UpsertEarthquake`'s action shortcut function
+
+```typescript
+import { getDataConnect } from 'firebase/data-connect';
+import { connectorConfig, upsertEarthquake, UpsertEarthquakeVariables } from '@dataconnect/generated';
+
+// The `UpsertEarthquake` mutation requires an argument of type `UpsertEarthquakeVariables`:
+const upsertEarthquakeVars: UpsertEarthquakeVariables = {
+  usgsEventId: ..., 
+  magnitude: ..., 
+  locationDescription: ..., // optional
+  depthKm: ..., 
+  latitude: ..., 
+  longitude: ..., 
+  eventTimestamp: ..., 
+};
+
+// Call the `upsertEarthquake()` function to execute the mutation.
+// You can use the `await` keyword to wait for the promise to resolve.
+const { data } = await upsertEarthquake(upsertEarthquakeVars);
+// Variables can be defined inline as well.
+const { data } = await upsertEarthquake({ usgsEventId: ..., magnitude: ..., locationDescription: ..., depthKm: ..., latitude: ..., longitude: ..., eventTimestamp: ..., });
+
+// You can also pass in a `DataConnect` instance to the action shortcut function.
+const dataConnect = getDataConnect(connectorConfig);
+const { data } = await upsertEarthquake(dataConnect, upsertEarthquakeVars);
+
+console.log(data.earthquake_upsert);
+
+// Or, you can use the `Promise` API.
+upsertEarthquake(upsertEarthquakeVars).then((response) => {
+  const data = response.data;
+  console.log(data.earthquake_upsert);
+});
+```
+
+### Using `UpsertEarthquake`'s `MutationRef` function
+
+```typescript
+import { getDataConnect, executeMutation } from 'firebase/data-connect';
+import { connectorConfig, upsertEarthquakeRef, UpsertEarthquakeVariables } from '@dataconnect/generated';
+
+// The `UpsertEarthquake` mutation requires an argument of type `UpsertEarthquakeVariables`:
+const upsertEarthquakeVars: UpsertEarthquakeVariables = {
+  usgsEventId: ..., 
+  magnitude: ..., 
+  locationDescription: ..., // optional
+  depthKm: ..., 
+  latitude: ..., 
+  longitude: ..., 
+  eventTimestamp: ..., 
+};
+
+// Call the `upsertEarthquakeRef()` function to get a reference to the mutation.
+const ref = upsertEarthquakeRef(upsertEarthquakeVars);
+// Variables can be defined inline as well.
+const ref = upsertEarthquakeRef({ usgsEventId: ..., magnitude: ..., locationDescription: ..., depthKm: ..., latitude: ..., longitude: ..., eventTimestamp: ..., });
+
+// You can also pass in a `DataConnect` instance to the `MutationRef` function.
+const dataConnect = getDataConnect(connectorConfig);
+const ref = upsertEarthquakeRef(dataConnect, upsertEarthquakeVars);
+
+// Call `executeMutation()` on the reference to execute the mutation.
+// You can use the `await` keyword to wait for the promise to resolve.
+const { data } = await executeMutation(ref);
+
+console.log(data.earthquake_upsert);
+
+// Or, you can use the `Promise` API.
+executeMutation(ref).then((response) => {
+  const data = response.data;
+  console.log(data.earthquake_upsert);
 });
 ```
 

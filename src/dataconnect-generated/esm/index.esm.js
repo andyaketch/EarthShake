@@ -30,3 +30,15 @@ export function upsertMember(dcOrVars, vars) {
   return executeMutation(upsertMemberRef(dcInstance, inputVars));
 }
 
+export const upsertEarthquakeRef = (dcOrVars, vars) => {
+  const { dc: dcInstance, vars: inputVars} = validateArgs(connectorConfig, dcOrVars, vars, true);
+  dcInstance._useGeneratedSdk();
+  return mutationRef(dcInstance, 'UpsertEarthquake', inputVars);
+}
+upsertEarthquakeRef.operationName = 'UpsertEarthquake';
+
+export function upsertEarthquake(dcOrVars, vars) {
+  const { dc: dcInstance, vars: inputVars } = validateArgs(connectorConfig, dcOrVars, vars, true);
+  return executeMutation(upsertEarthquakeRef(dcInstance, inputVars));
+}
+

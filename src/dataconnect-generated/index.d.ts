@@ -42,6 +42,20 @@ export interface Member_Key {
   __typename?: 'Member_Key';
 }
 
+export interface UpsertEarthquakeData {
+  earthquake_upsert: Earthquake_Key;
+}
+
+export interface UpsertEarthquakeVariables {
+  usgsEventId: string;
+  magnitude: number;
+  locationDescription?: string | null;
+  depthKm: number;
+  latitude: number;
+  longitude: number;
+  eventTimestamp: TimestampString;
+}
+
 export interface UpsertMemberData {
   member_upsert: Member_Key;
 }
@@ -75,4 +89,16 @@ export const upsertMemberRef: UpsertMemberRef;
 
 export function upsertMember(vars: UpsertMemberVariables): MutationPromise<UpsertMemberData, UpsertMemberVariables>;
 export function upsertMember(dc: DataConnect, vars: UpsertMemberVariables): MutationPromise<UpsertMemberData, UpsertMemberVariables>;
+
+interface UpsertEarthquakeRef {
+  /* Allow users to create refs without passing in DataConnect */
+  (vars: UpsertEarthquakeVariables): MutationRef<UpsertEarthquakeData, UpsertEarthquakeVariables>;
+  /* Allow users to pass in custom DataConnect instances */
+  (dc: DataConnect, vars: UpsertEarthquakeVariables): MutationRef<UpsertEarthquakeData, UpsertEarthquakeVariables>;
+  operationName: string;
+}
+export const upsertEarthquakeRef: UpsertEarthquakeRef;
+
+export function upsertEarthquake(vars: UpsertEarthquakeVariables): MutationPromise<UpsertEarthquakeData, UpsertEarthquakeVariables>;
+export function upsertEarthquake(dc: DataConnect, vars: UpsertEarthquakeVariables): MutationPromise<UpsertEarthquakeData, UpsertEarthquakeVariables>;
 

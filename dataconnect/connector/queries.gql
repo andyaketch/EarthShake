@@ -1,3 +1,4 @@
+
 query ListEarthquakes @auth(level: PUBLIC) {
   earthquakes(orderBy: [{ eventTimestamp: DESC }]) {
     usgsEventId
@@ -22,6 +23,28 @@ mutation UpsertMember(
       displayName: $displayName
       createdAt: $createdAt
       lastLoginAt_expr: "request.time"
+    }
+  )
+}
+
+mutation UpsertEarthquake(
+  $usgsEventId: String!
+  $magnitude: Float!
+  $locationDescription: String
+  $depthKm: Float!
+  $latitude: Float!
+  $longitude: Float!
+  $eventTimestamp: Timestamp!
+) @auth(level: PUBLIC) {
+  earthquake_upsert(
+    data: {
+      usgsEventId: $usgsEventId
+      magnitude: $magnitude
+      locationDescription: $locationDescription
+      depthKm: $depthKm
+      latitude: $latitude
+      longitude: $longitude
+      eventTimestamp: $eventTimestamp
     }
   )
 }
