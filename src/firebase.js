@@ -1,8 +1,10 @@
+
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
+import { getDataConnect } from "firebase/data-connect";
+import { connectorConfig } from "@dataconnect/generated";
 
-// Firebase configuration from environment variables
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
   authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
@@ -12,12 +14,10 @@ const firebaseConfig = {
   appId: import.meta.env.VITE_FIREBASE_APP_ID
 };
 
-// Initialise Firebase
 const app = initializeApp(firebaseConfig);
 
-// Initialise Firebase services
 const auth = getAuth(app);
 const db = getFirestore(app);
+const dataConnect = getDataConnect(connectorConfig);
 
-// Export instances
-export { app, auth, db };
+export { app, auth, db, dataConnect };
