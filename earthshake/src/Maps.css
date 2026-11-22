@@ -1,9 +1,0 @@
-#map-container {
-  width: 100%;
-  height: 520px; /* Leaflet must have a specified height */
-  border: 2px solid var(--navy);
-  border-radius: 8px;
-  box-shadow: 0 4px 10px rgba(18, 32, 43, 0.2);
-}
-
-.leaflet-container a { color: var(--navy); }
