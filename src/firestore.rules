@@ -1,0 +1,10 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /members/{memberId} {
+      // Each signed-in member can read and maintain only their own profile.
+      allow read, create, update, delete: if request.auth != null
+        && request.auth.uid == memberId;
+    }
+  }
+}
