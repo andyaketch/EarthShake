@@ -1,0 +1,34 @@
+type Member @table(key: "authUid") {
+  authUid: String!
+  email: String!
+  displayName: String!
+  createdAt: Timestamp!
+  lastLoginAt: Timestamp
+}
+
+type Earthquake @table(key: "usgsEventId") {
+  usgsEventId: String!
+  magnitude: Float!
+  locationDescription: String
+  depthKm: Float!
+  latitude: Float!
+  longitude: Float!
+  eventTimestamp: Timestamp!
+}
+
+type FeltReport @table {
+  description: String!
+  reportedLocation: String
+  latitude: Float!
+  longitude: Float!
+  submissionTimestamp: Timestamp!
+  member: Member!
+  earthquake: Earthquake
+}
+
+type Comment @table {
+  text: String!
+  creationTimestamp: Timestamp!
+  member: Member!
+  earthquake: Earthquake!
+}
