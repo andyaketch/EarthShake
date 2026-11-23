@@ -4,7 +4,6 @@ import { StyledEngineProvider, ThemeProvider, createTheme } from '@mui/material/
 import './index.css'
 import App from './App.jsx'
 
-// mui theme, only turquoise + dark grey. dark is same as main so hover dont add a new colour
 const theme = createTheme({
   palette: {
     primary: {
@@ -15,7 +14,6 @@ const theme = createTheme({
   },
 })
 
-// the providers must WRAP app, before it was closed empty so app was outside (my bad)
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <StyledEngineProvider enableCssLayer>

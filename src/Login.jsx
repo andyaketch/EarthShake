@@ -2,7 +2,6 @@ import { useState } from "react";
 import Button from "@mui/material/Button";
 import { registerUser, loginUser, loginWithGoogle } from "./access";
 
-// mui buttons are turquoise by default, on the light card we need dark text for the others
 const darkButton = { color: "var(--color-charcoal)", borderColor: "var(--color-charcoal)" };
 
 function Login() {
@@ -41,7 +40,7 @@ function Login() {
 
   return (
     <div className="min-h-screen flex items-center justify-center p-4">
-      {/* card, form-control etc are bootstrap classes. w-full max-w-sm is tailwind */}
+      {}
       <div className="card w-full max-w-sm">
         <div className="card-body">
           <h1 className="h3 mb-1">EarthShake</h1>
@@ -50,7 +49,7 @@ function Login() {
           <form onSubmit={handleSubmit}>
             <div className="mb-3">
               <label className="form-label">Email</label>
-              {/* controlled input: value comes from state, onChange updates the state */}
+              {}
               <input
                 type="email"
                 className="form-control"

@@ -4,13 +4,11 @@ import { monitorAuthState, logoutUser } from "./access";
 import Login from "./Login";
 import Quakes from "./Quakes";
 
-// react basic 1: a component is just a function that return jsx (html looking stuff)
 function App() {
-  // react basic 2: useState = a variable that react watch. change it and screen update
   const [me, setMe] = useState(null); // null means nobody is logged in
   const [checking, setChecking] = useState(true);
 
-  // react basic 3: useEffect runs after the screen shows. the [] means only one time
+  // useEffect runs after the screen shows. the [] means only one time
   useEffect(() => {
     const stopListening = monitorAuthState((user) => {
       setMe(user);

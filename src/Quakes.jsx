@@ -34,12 +34,12 @@ function Quakes() {
       <h2 className="text-2xl font-bold mb-1">Recent Earthquakes</h2>
       <p className="mb-4 text-sm">Magnitude 4.5+ from the past 7 days, source USGS</p>
 
-      {/* && means: if the left side is true then show the right side */}
+      {}/* && means: if the left side is true then show the right side */
       {stillLoading && <p>Loading earthquake records...</p>}
       {oops && <p>{oops}</p>}
 
       <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
-        {/* map = loop over the list and make a card for each one. key helps react track them */}
+        {}/* map = loop over the list and make a card for each one. key helps react track them */
         {quakes.slice(0, 30).map((q) => (
           <QuakeCard
             key={q.id}

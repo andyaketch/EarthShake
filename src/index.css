@@ -3,7 +3,6 @@
 @import "tailwindcss";
 @import "bootstrap/dist/css/bootstrap.min.css" layer(bootstrap);
 
-/* the 3 colours, thats all we use. tailwind makes bg-turq text-charcoal etc from these. dont call them light/dark, bootstrap already has those names and they fight */
 @theme static {
   --color-turq: #2dd4bf;
   --color-charcoal: #2f3640;
@@ -17,14 +16,13 @@ body {
   font-family: Arial, sans-serif;
 }
 
-/* bootstrap uses its own variables for colours, so we change them to our greys */
+
 :root {
   --bs-body-bg: var(--color-fog);
   --bs-body-color: var(--color-charcoal);
   --bs-border-color: var(--color-charcoal);
 }
 
-/* default focus glow is blue, no blue allowed */
 .form-control:focus {
   border-color: var(--color-turq);
   box-shadow: 0 0 0 3px var(--color-turq);

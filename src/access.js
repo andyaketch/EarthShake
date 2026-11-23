@@ -19,7 +19,6 @@ export const loginUser = (email, password) => {
   return signInWithEmailAndPassword(auth, email, password);
 };
 
-// the social route, google popup. need to turn google on in firebase console first
 export const loginWithGoogle = () => {
   const provider = new GoogleAuthProvider();
   return signInWithPopup(auth, provider);
@@ -30,7 +29,7 @@ export const logoutUser = () => {
   return signOut(auth);
 };
 
-// firebase tell us when user come or go, this gives back a function to stop listening
+// firebase tell us when user comes or goes, this gives back a function to stop listening
 export const monitorAuthState = (callback) => {
   return onAuthStateChanged(auth, callback);
 };

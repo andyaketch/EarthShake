@@ -1,4 +1,4 @@
-// react basic 4: props. the parent pass data in, we pull it out with { }
+//props. the parent pass data in, we pull it out with { }
 function QuakeCard({ mag, place, depth, time, link }) {
   return (
     <article className="bg-fog text-charcoal rounded-lg p-4 border-l-8 border-turq">
