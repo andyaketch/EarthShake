@@ -1,16 +1,48 @@
-# React + Vite
+# EarthShake
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Understanding earthquakes. Staying prepared.
 
-Currently, two official plugins are available:
+EarthShake is a secure dashboard that shows recent earthquakes in one clean place. Earthquake data is public, but it is buried in raw feeds and jargon. Sign in, and you see every magnitude 4.5+ earthquake from the past 7 days, live from the USGS.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+**Live site:** [EarthShake web app](https://andyaketch.github.io/EarthShake/)
 
-## React Compiler
+## Features
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- Register, log in and log out with email and password
+- Sign in with Google
+- Live earthquake data from the USGS API, with magnitude, location, depth, time and a link to the official report
+- Loading and error messages
 
-## Expanding the ESLint configuration
+## Built with
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+React, Vite, Firebase Authentication, Material UI, Bootstrap, Tailwind CSS, Vitest and React Testing Library. GitHub Actions runs the build and tests.
+
+## Run it locally
+
+```bash
+git clone https://github.com/your-username/your-repo.git
+cd your-repo
+npm install
+```
+
+Create a `.env.local` file in the project root with your own Firebase values:
+
+```
+VITE_FIREBASE_API_KEY=
+VITE_FIREBASE_AUTH_DOMAIN=
+VITE_FIREBASE_PROJECT_ID=
+VITE_FIREBASE_STORAGE_BUCKET=
+VITE_FIREBASE_MESSAGING_SENDER_ID=
+VITE_FIREBASE_APP_ID=
+```
+
+Then:
+
+```bash
+npm run dev
+npm test
+```
+
+## What is next
+
+A map view, saving earthquakes, and comments.
